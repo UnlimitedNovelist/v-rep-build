@@ -5,7 +5,7 @@ project=v-rep
 containerid=$project-build-$randstr
 imageid=$project-build-$(id -u)
 
-(set -xe; podman build -t $imageid .)
+(set -xe; podman build --target builder -t $imageid .)
 
 set -xe
 
