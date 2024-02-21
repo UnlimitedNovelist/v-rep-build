@@ -84,6 +84,9 @@ RUN bash /other_mod.sh && rm /other_mod.sh
 #RUN echo 'deb-src http://httpredir.debian.org/debian bookworm main non-free contrib' >> /etc/apt/sources.list
 #RUN apt-get update && apt-get source libqscintilla2-qt5-15
 
+COPY keep_mod.sh /keep_mod.sh
+RUN bash /keep_mod.sh && rm /keep_mod.sh
+
 FROM install_dep AS qscintilla
 
 WORKDIR /v-rep
@@ -108,12 +111,13 @@ COPY --from=qscintilla /v-rep .
 
 #RUN find /v-rep/ -type f -name '*.so' # | xargs cp -t /release
 RUN ls /release
+RUN cat /release/result.txt
 
 # Clean up to reduce image size
-#RUN apt-get clean && \
-#    rm -rf \
-#        /var/lib/apt/lists/* \
-#        /tmp/* \
-#        /var/tmp/*
+RUN apt-get clean && \
+    rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/*
 
 ENTRYPOINT ["/bin/bash"]
