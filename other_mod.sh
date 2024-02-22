@@ -1,21 +1,29 @@
 #! /bin/bash
 
-cd /v-rep/programming && find . -type d -maxdepth 1 -mindepth 1 | sort -u > /v-rep/cloning-dir.txt && cat /v-rep/cloning-dir.txt
+pushd /v-rep/programming
+find . -type d -maxdepth 1 -mindepth 1 | sort -u > /v-rep/cloning-dir.txt
+popd
+
+echo "Full repos list"
+cat /v-rep/cloning-dir.txt
 
 # Ignore some repo in this run
-sed '/simCodeEditor/d' /v-rep/cloning-dir.txt
-sed '/wsRemoteApi/d' /v-rep/cloning-dir.txt
-sed '/legacyRemoteApi/d' /v-rep/cloning-dir.txt
-sed '/zmpRemoteApi/d' /v-rep/cloning-dir.txt
-sed '/coppeliaSimClient/d' /v-rep/cloning-dir.txt
-sed '/coppeliaSimClientPython/d' /v-rep/cloning-dir.txt
+sed -i '/simCodeEditor/d' /v-rep/cloning-dir.txt
+sed -i '/wsRemoteApi/d' /v-rep/cloning-dir.txt
+sed -i '/legacyRemoteApi/d' /v-rep/cloning-dir.txt
+sed -i '/zmqRemoteApi/d' /v-rep/cloning-dir.txt
+sed -i '/coppeliaSimClient/d' /v-rep/cloning-dir.txt
+sed -i '/coppeliaSimClientPython/d' /v-rep/cloning-dir.txt
 
 # Ignore header files
-sed '/include/d' /v-rep/cloning-dir.txt
+sed -i '/include/d' /v-rep/cloning-dir.txt
 
 # Exclude Windows-specific repo
-sed '/simExtCam/d' /v-rep/cloning-dir.txt
-sed '/simExtJoystick/d' /v-rep/cloning-dir.txt
+sed -i '/simExtCam/d' /v-rep/cloning-dir.txt
+sed -i '/simExtJoystick/d' /v-rep/cloning-dir.txt
+
+echo "Excluding some repos"
+cat /v-rep/cloning-dir.txt
 
 REPOS=$(cat /v-rep/cloning-dir.txt)
 
