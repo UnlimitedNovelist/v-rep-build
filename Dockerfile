@@ -75,7 +75,7 @@ FROM install_dep AS builder
 WORKDIR /v-rep
 COPY --from=cloner /v-rep .
 
-#RUN ls /v-rep
+RUN ls /v-rep/programming
 
 COPY other_mod.sh /other_mod.sh
 RUN bash /other_mod.sh && rm /other_mod.sh
@@ -83,6 +83,8 @@ RUN bash /other_mod.sh && rm /other_mod.sh
 #SHELL ["/bin/bash", "-c"]
 #RUN echo 'deb-src http://httpredir.debian.org/debian bookworm main non-free contrib' >> /etc/apt/sources.list
 #RUN apt-get update && apt-get source libqscintilla2-qt5-15
+
+RUN ls /v-rep/programming
 
 COPY keep_mod.sh /keep_mod.sh
 RUN bash /keep_mod.sh && rm /keep_mod.sh
