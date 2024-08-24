@@ -2,7 +2,8 @@ name: Build nightly
 on:
   schedule:
     - cron: "0 0 * * *"
-
+  workflow_dispatch:
+  
 jobs:
   check:
     runs-on: 'ubuntu-latest'
